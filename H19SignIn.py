@@ -1,12 +1,12 @@
 import requests
 
-class H19SignIn:
+class H19SignIn(object):
 
 	#sess = ""
-	POST_url = "https://webws.hole19golf.com/api/v2/users/sign_in"
+	POST_url = "https://appws.hole19golf.com/api/v2/users/sign_in"
 	#POST_url = "https://webws.hole19golf.com/api/v2/courses/106752"
-	cookies = "_h19_session=T1FyNWxqUmdZcjhhZXVON2diMVR0aEVTV2QzZUlwcVBIYWxJWDV4djJ0ZTVDNlZ1NHl4WHVVYXVXa2Uvb0NjR0tKQU5vc1hVakJCU3JZc0JaTjdGUUE9PS0tTVFtUUFQaisyOGJxdDlhT21tVHREdz09--107a38991a2d811c8fa4be3c2615bd82dfae29cc; __cfduid=deb24d0e3ce1ac2f40be82b4f81479bde1538586041";
-
+	cookiesDict = {'_h19_session': 'fuckYOU',}
+	
 
 	params = {
 		"email": "pmumbles@yahoo.co.uk",
@@ -25,26 +25,19 @@ class H19SignIn:
 		"Host": "appws.hole19golf.com",
 		"Connection": "Keep-Alive",
 		"Accept-Encoding": "gzip",
-		"Cookie" : cookies,
 		"User-Agent": "okhttp/3.8.0"	
 	}
 	 
-	 
-	  	# The class "constructor" - It's actually an initializer 
-	#def __init__(self, sess):
-		#self.cookie = cookie
-		#self.sess = sess		
-		#print("Cookie sent into GetCourses")		
-		#print(cookie + self.cfduid)
-	 
-	def getCookies(self):
+	def getSignInCookies(self, sess):
 		thisdict = {}
-		sess = requests.Session()
+		print("\nThe cookies dictionary  sent to Sign In is: ")
+		print(self.cookiesDict)
 		a = sess.post(self.POST_url,  headers = self.browser_headers, data = self.params)
-		#print(a.text)
+		print(a.text) # this confirms that login was successful
 		#print("Cookies")
 		for c in a.cookies:
 			thisdict =	{c.name : c.value}
-		#print(thisdict)
+		print('\nSession: ')
+		print(a.cookies)
 		return thisdict
 		
